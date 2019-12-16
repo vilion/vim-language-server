@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  nvim:
+    image: virtualion/neovim-languageserver
+    volumes:
+      - "~/Documents/書類 - TAKABATAKEKOICHI の MacBook Pro/study/ruby/rails/Dissecting Ruby on Rails 5 - Become a Professional Developer/:/srv"
+      - "./volume/vim:/root/.vim"
+    command: sh -c 'while sleep 3600; do :; done'
+    tty: true
+    stdin_open: true
+    

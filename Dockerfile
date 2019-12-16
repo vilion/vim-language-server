@@ -1,4 +1,4 @@
-FROM alpine:3.10.0
+FROM alpine:latest
 
 RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories
 RUN apk update && apk upgrade
@@ -69,10 +69,11 @@ COPY files/vimrc /root/.config/nvim/init.vim
 ENV PATH $HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
 ENV PATH $HOME/.composer/vendor/bin:$PATH
 
-RUN nvim -i NONE -c PlugInstall -c quitall
+RUN nvim --headless +'PlugInstall --sync' +'PlugUpdate' +qa
+#RUN nvim -i NONE -c PlugInstall --sync --headless -c quitall
 
-COPY languagetool.sh /usr/local/bin/languagetool
-RUN chmod +x /usr/local/bin/languagetool
+#COPY languagetool.sh /usr/local/bin/languagetool
+#RUN chmod +x /usr/local/bin/languagetool
 
 ENV FZF_DEFAULT_COMMAND 'ag -g ""'
 
